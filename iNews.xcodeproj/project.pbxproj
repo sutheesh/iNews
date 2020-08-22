@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		904F22A324F0CBD700561E05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A224F0CBD700561E05 /* AppDelegate.swift */; };
-		904F22A524F0CBD700561E05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A424F0CBD700561E05 /* SceneDelegate.swift */; };
 		904F22A724F0CBD700561E05 /* ForYouController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A624F0CBD700561E05 /* ForYouController.swift */; };
 		904F22A924F0CBD700561E05 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A824F0CBD700561E05 /* SecondViewController.swift */; };
 		904F22AC24F0CBD700561E05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904F22AA24F0CBD700561E05 /* Main.storyboard */; };
@@ -248,7 +247,6 @@
 				904F22A324F0CBD700561E05 /* AppDelegate.swift in Sources */,
 				905E1CB924F0F3EA0075DD93 /* ForYouViewModel.swift in Sources */,
 				904F22BD24F0F14600561E05 /* BriefingCell.swift in Sources */,
-				904F22A524F0CBD700561E05 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
