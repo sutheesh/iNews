@@ -223,7 +223,7 @@
             </objects>
             <point key="canvasLocation" x="1745.625" y="-321.12676056338029"/>
         </scene>
-        <!--Second-->
+        <!--News Now-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="iNews" customModuleProvider="target" sceneMemberID="viewController">
@@ -252,7 +252,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="News Now" image="news_now" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,7 +279,7 @@
             </objects>
             <point key="canvasLocation" x="-659" y="-9"/>
         </scene>
-        <!--Item-->
+        <!--favorite-->
         <scene sceneID="WVf-ZP-tUi">
             <objects>
                 <viewController id="JZA-N7-Ieq" sceneMemberID="viewController">
@@ -289,13 +289,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="vvG-bb-qqx"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="fd2-tp-UyK"/>
+                    <tabBarItem key="tabBarItem" title="favorite" image="favorite" id="fd2-tp-UyK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glX-FX-Use" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-659" y="903"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="LLE-ws-dG4">
             <objects>
                 <viewController id="Sb0-LJ-mN5" sceneMemberID="viewController">
@@ -305,17 +305,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="gmd-ks-oZt"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="MGJ-0A-6VV"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="MGJ-0A-6VV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEB-yT-1Go" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="120" y="895"/>
         </scene>
-        <!--First-->
+        <!--For You-->
         <scene sceneID="ZjV-eH-HRb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pr1-fh-cbH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="For You" image="for_you" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gNj-t0-RWm">
@@ -332,7 +332,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="favorite" width="20" height="20"/>
+        <image name="for_you" width="25" height="25"/>
+        <image name="news_now" width="20" height="20"/>
+        <image name="profile" width="30" height="30"/>
     </resources>
 </document>

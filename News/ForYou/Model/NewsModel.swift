@@ -17,7 +17,7 @@ class NewsModel: Codable {
     let publish_date: publishDate
     let author: String
     let source: String
-    let category: String
+    let tags: [String]
     let createdAt: String
     let updatedAt: String
 }

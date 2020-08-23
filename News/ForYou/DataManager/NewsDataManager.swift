@@ -32,6 +32,12 @@ class NewsDataManager: NewsDataManaging {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
 
+        let json: [String: Any] = ["title": "ABC",
+                                   "dict": ["1":"First", "2":"Second"]]
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+
+        
         let loadDataTask = session.dataTask(with: request) { data, response, error in
             
             guard error == nil else {

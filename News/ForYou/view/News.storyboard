@@ -26,10 +26,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIG-I6-fBl">
-                                        <rect key="frame" x="0.0" y="209" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="209" width="414" height="110"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9cZ-Wk-Nu8">
-                                                <rect key="frame" x="40" y="12" width="334" height="40"/>
+                                                <rect key="frame" x="40" y="8" width="334" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCb-nL-M0s">
                                                         <rect key="frame" x="0.0" y="7.6666666666666572" width="25" height="25"/>
@@ -69,19 +69,19 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.19607843137254902" green="0.16470588235294117" blue="0.1803921568627451" alpha="0.93396832191780821" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.21933280767890906" green="0.18533323719532954" blue="0.20499357582739289" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="9cZ-Wk-Nu8" firstAttribute="leading" secondItem="ZIG-I6-fBl" secondAttribute="leading" constant="40" id="PYp-4a-bSg"/>
-                                            <constraint firstItem="9cZ-Wk-Nu8" firstAttribute="top" secondItem="ZIG-I6-fBl" secondAttribute="top" constant="12" id="cHS-kn-qi9"/>
-                                            <constraint firstAttribute="height" constant="120" id="diD-Oh-AgY"/>
+                                            <constraint firstItem="9cZ-Wk-Nu8" firstAttribute="top" secondItem="ZIG-I6-fBl" secondAttribute="top" constant="8" id="cHS-kn-qi9"/>
+                                            <constraint firstAttribute="height" constant="110" id="diD-Oh-AgY"/>
                                             <constraint firstAttribute="trailing" secondItem="9cZ-Wk-Nu8" secondAttribute="trailing" constant="40" id="gyp-om-VLo"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAt-qC-XdM">
-                                        <rect key="frame" x="0.0" y="274" width="414" height="442"/>
+                                        <rect key="frame" x="0.0" y="264" width="414" height="452"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7pr-Fg-4Or">
-                                                <rect key="frame" x="20" y="10" width="374" height="422"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="432"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
