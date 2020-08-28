@@ -1,0 +1,56 @@
+{
+    "results": [
+        {
+            "objectId": "EHVW2bkPu1",
+            "enabledPlatforms": [
+                "iOS-PROD"
+            ],
+            "createdAt": "2020-08-28T03:52:57.635Z",
+            "updatedAt": "2020-08-28T04:03:26.675Z",
+            "apiVersions": [
+                "1.0"
+            ],
+            "supportedLanguages": [
+                {
+                    "id": "Tamil",
+                    "text": "தமிழ்"
+                },
+                {
+                    "id": "Malayalam",
+                    "text": "மலையாளம்"
+                }
+            ],
+            "supportedCategories": [
+                {
+                    "id": "Technology",
+                    "text": "Technology"
+                },
+                {
+                    "id": "Science",
+                    "text": "Science"
+                },
+                {
+                    "id": "Business",
+                    "text": "Business"
+                },
+                {
+                    "id": "Sports",
+                    "text": "Sports"
+                },
+                {
+                    "id": "Travel",
+                    "text": "Travel"
+                },
+                {
+                    "id": "Politics",
+                    "text": "Politics"
+                }
+            ],
+            "ACL": {
+                "*": {
+                    "read": true
+                }
+            }
+        }
+    ]
+}

@@ -10,15 +10,27 @@ import Foundation
 class ForYouViewModel: NSObject {
     
     let dataManager: NewsDataManaging
-    var news: [NewsModel] = []
-    init(dataManager: NewsDataManaging) {
+    let category: String?
+    var cells: [cellType] = [.briefing, .news]
+
+    init(dataManager: NewsDataManaging, category: String? = nil) {
         self.dataManager = dataManager
+        self.category = category
+        super.init()
+        self.setupCells()
     }
+    
+    func setupCells() {
+        if tags.count > 0 {
+            cells.removeFirst()
+        }
+    }
+    
+    var news: [NewsModel] = []
     
     enum cellType {
         case briefing, news
     }
-    let cells: [cellType] = [.briefing, .news]
     
     var numberOfSection: Int {
         return cells.count
@@ -34,13 +46,25 @@ class ForYouViewModel: NSObject {
     }
     
     func fetchNews(callback:@escaping()->Void) {
-        guard let url = URL(string: NewsConstants.urlHost) else {callback();return}
-        dataManager.fetchNews(url: url) { (data, error) in
+        var urlString = NewsConstants.newsUrl
+        if tags.count > 0 {
+            urlString += "&where={\"tags\":{\"$all\": \(tags)}}"
+        }
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        dataManager.fetchNews(urlString) { (data, error) in
             guard error == nil else { callback(); return}
             self.news = data ?? []
             DispatchQueue.main.async {
                 callback()
             }
         }
+    }
+    
+    var tags: [String] {
+        guard let category = self.category else {
+            return []
+        }
+        return [category]
     }
 }

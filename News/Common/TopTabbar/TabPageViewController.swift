@@ -144,7 +144,7 @@ extension TabPageViewController {
         if let topPadding = UIApplication.shared.keyWindow?.safeAreaInsets.top, topPadding != 0 {
             let topView = UIView()
             topView.translatesAutoresizingMaskIntoConstraints = false
-            topView.backgroundColor = option.tabBackgroundColor.withAlphaComponent(option.tabBarAlpha)
+            topView.backgroundColor = option.tabBackgroundColor//.withAlphaComponent(option.tabBarAlpha)
             
             view.addSubview(topView)
             topView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true

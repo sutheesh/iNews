@@ -10,7 +10,7 @@ import UIKit
 
 class ForYouController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    let viewModel = ForYouViewModel(dataManager: NewsDataManager())
+    var viewModel = ForYouViewModel(dataManager: NewsDataManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,5 +59,11 @@ extension ForYouController: UITableViewDelegate {
             self.navigationController?.pushViewController(controller, animated: true)
         default: break
         }
+    }
+}
+
+extension ForYouController {
+    static var controller: ForYouController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForYouController") as? ForYouController ?? ForYouController()
     }
 }

@@ -12,13 +12,21 @@ class NewsNowPageController: TabPageViewController {
 
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        let vc1 = UIViewController()
-        vc1.view.backgroundColor = UIColor.white
-        let vc2 = UIViewController()
-        vc1.view.backgroundColor = UIColor.green
-        tabItems = [(vc2, "Second"),(vc1, "First")]
+        tabItems = controllers()
         option.tabWidth = view.frame.width / CGFloat(tabItems.count)
         super.viewDidLoad()
+    }
+    
+    func controllers() -> [(UIViewController, String)] {
+        guard let categories = sharedModel.shared.config?.supportedCategories else { return []}
+        var controllers: [(UIViewController, String)] = []
+        for catagory in categories {
+            let vc = ForYouController.controller
+            let model = ForYouViewModel(dataManager: NewsDataManager(), category: catagory.id)
+            vc.viewModel = model
+            controllers.append((vc, catagory.text))
+        }
+        return controllers
     }
 }
 

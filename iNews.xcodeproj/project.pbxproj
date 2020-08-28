@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90253CE124F8BC6C004B8964 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90253CE024F8BC6C004B8964 /* LaunchViewController.swift */; };
+		90253CE324F8C0E0004B8964 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90253CE224F8C0E0004B8964 /* ConfigModel.swift */; };
+		90253CE524F8C23F004B8964 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 90253CE424F8C23F004B8964 /* config.json */; };
+		90253CE724F8C5BE004B8964 /* SharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90253CE624F8C5BE004B8964 /* SharedModel.swift */; };
 		904F22A324F0CBD700561E05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A224F0CBD700561E05 /* AppDelegate.swift */; };
 		904F22A724F0CBD700561E05 /* ForYouController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A624F0CBD700561E05 /* ForYouController.swift */; };
 		904F22A924F0CBD700561E05 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F22A824F0CBD700561E05 /* SecondViewController.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90253CE024F8BC6C004B8964 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		90253CE224F8C0E0004B8964 /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		90253CE424F8C23F004B8964 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		90253CE624F8C5BE004B8964 /* SharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModel.swift; sourceTree = "<group>"; };
 		904F229F24F0CBD700561E05 /* iNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904F22A224F0CBD700561E05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904F22A424F0CBD700561E05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,8 +120,6 @@
 		904F22B824F0F0ED00561E05 /* ForYou */ = {
 			isa = PBXGroup;
 			children = (
-				905E1CBB24F0F8C80075DD93 /* Model */,
-				905E1CBA24F0F8B90075DD93 /* DataManager */,
 				904F22BB24F0F11F00561E05 /* view */,
 				904F22BA24F0F11200561E05 /* viewModel */,
 				904F22B924F0F0FF00561E05 /* controller */,
@@ -161,6 +167,8 @@
 			children = (
 				905E1CC324F16F930075DD93 /* news.json */,
 				905E1CBC24F0F8D70075DD93 /* NewsModel.swift */,
+				90253CE224F8C0E0004B8964 /* ConfigModel.swift */,
+				90253CE424F8C23F004B8964 /* config.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,11 +176,15 @@
 		905E1CC024F1051E0075DD93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				905E1CBB24F0F8C80075DD93 /* Model */,
+				905E1CBA24F0F8B90075DD93 /* DataManager */,
 				905E1CCF24F2BA520075DD93 /* TopTabbar */,
 				905E1CC124F1052C0075DD93 /* ImageLoader.swift */,
 				905E1CC524F16FA60075DD93 /* NewsConstants.swift */,
 				905E1CCB24F18A120075DD93 /* UIView+Extension.swift */,
 				905E1CCD24F1AC120075DD93 /* Date+Extension.swift */,
+				90253CE024F8BC6C004B8964 /* LaunchViewController.swift */,
+				90253CE624F8C5BE004B8964 /* SharedModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -266,6 +278,7 @@
 			files = (
 				904F22B124F0CBDB00561E05 /* LaunchScreen.storyboard in Resources */,
 				904F22AE24F0CBDB00561E05 /* Assets.xcassets in Resources */,
+				90253CE524F8C23F004B8964 /* config.json in Resources */,
 				905E1CD724F2BA690075DD93 /* TabView.xib in Resources */,
 				905E1CC824F179F50075DD93 /* News.storyboard in Resources */,
 				905E1CD824F2BA690075DD93 /* TabCollectionCell.xib in Resources */,
@@ -293,12 +306,15 @@
 				904F22A924F0CBD700561E05 /* SecondViewController.swift in Sources */,
 				905E1CDB24F2BA690075DD93 /* TabCollectionCell.swift in Sources */,
 				905E1CDA24F2BA690075DD93 /* TabPageViewController.swift in Sources */,
+				90253CE724F8C5BE004B8964 /* SharedModel.swift in Sources */,
 				904F22BF24F0F15B00561E05 /* NewViewCell.swift in Sources */,
+				90253CE124F8BC6C004B8964 /* LaunchViewController.swift in Sources */,
 				905E1CC624F16FA60075DD93 /* NewsConstants.swift in Sources */,
 				904F22A724F0CBD700561E05 /* ForYouController.swift in Sources */,
 				904F22A324F0CBD700561E05 /* AppDelegate.swift in Sources */,
 				905E1CB924F0F3EA0075DD93 /* ForYouViewModel.swift in Sources */,
 				904F22BD24F0F14600561E05 /* BriefingCell.swift in Sources */,
+				90253CE324F8C0E0004B8964 /* ConfigModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
