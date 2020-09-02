@@ -17,33 +17,47 @@
                 },
                 {
                     "id": "Malayalam",
-                    "text": "மலையாளம்"
+                    "text": "മലയാളം"
+                },
+                {
+                    "id": "Telugu",
+                    "text": "తెలుగు"
+                },
+                {
+                    "id": "Kannada",
+                    "text": "ಕನ್ನಡ"
                 }
             ],
             "supportedCategories": [
                 {
                     "id": "Technology",
-                    "text": "Technology"
+                    "text": "Technology",
+                    "image": "http://www.memphisitcouncil.com/uploads/2/7/0/7/27075583/3676938.jpg?1396395716"
                 },
                 {
                     "id": "Science",
-                    "text": "Science"
+                    "text": "Science",
+                    "image": "https://www.nwrpdp.com/uploads/1/2/3/3/123306057/20160627-grand-challenges-of-science-31qtkdbz2aajgveb3em2gw_orig.jpg"
                 },
                 {
                     "id": "Business",
-                    "text": "Business"
+                    "text": "Business",
+                    "image": "https://image.freepik.com/free-vector/infographic-with-business-elements_23-2147488954.jpg"
                 },
                 {
                     "id": "Sports",
-                    "text": "Sports"
+                    "text": "Sports",
+                    "image": "https://pmcvariety.files.wordpress.com/2020/04/kings-senators-nhl.jpg?w=600"
                 },
                 {
                     "id": "Travel",
-                    "text": "Travel"
+                    "text": "Travel",
+                    "image": "https://www.marketingmaven.com/wp-content/uploads/2018/05/Travel-.jpg"
                 },
                 {
                     "id": "Politics",
-                    "text": "Politics"
+                    "text": "Politics",
+                    "image": "http://www.socialchangelab.net/uploads/9/8/7/7/98771854/forms-of-politics_orig.jpg"
                 }
             ],
             "ACL": {

@@ -24,7 +24,8 @@ class NewsNowPageController: TabPageViewController {
             let vc = ForYouController.controller
             let model = ForYouViewModel(dataManager: NewsDataManager(), category: catagory.id)
             vc.viewModel = model
-            controllers.append((vc, catagory.text))
+            let navC = UINavigationController(rootViewController: vc)
+            controllers.append((navC, catagory.text))
         }
         return controllers
     }
