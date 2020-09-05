@@ -186,7 +186,6 @@
                                                     <constraints>
                                                         <constraint firstItem="wcc-a5-dq4" firstAttribute="leading" secondItem="Bad-pL-X0t" secondAttribute="leading" constant="10" id="2gF-Vd-TWP"/>
                                                         <constraint firstItem="wcc-a5-dq4" firstAttribute="centerY" secondItem="Bad-pL-X0t" secondAttribute="centerY" id="AM6-Eg-AiL"/>
-                                                        <constraint firstItem="wcc-a5-dq4" firstAttribute="centerX" secondItem="Bad-pL-X0t" secondAttribute="centerX" id="P3a-WN-rnB"/>
                                                         <constraint firstItem="wcc-a5-dq4" firstAttribute="top" secondItem="Bad-pL-X0t" secondAttribute="top" constant="2" id="SzA-Lm-2aX"/>
                                                         <constraint firstAttribute="trailing" secondItem="wcc-a5-dq4" secondAttribute="trailing" constant="10" id="VIZ-oh-Sxm"/>
                                                         <constraint firstAttribute="bottom" secondItem="wcc-a5-dq4" secondAttribute="bottom" constant="2" id="Ygi-zk-6mU"/>

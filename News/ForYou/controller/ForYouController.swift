@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForYouController: UIViewController {
+class ForYouController: NewsBaseController {
     @IBOutlet weak var tableView: UITableView!
     var viewModel = ForYouViewModel(dataManager: NewsDataManager(), isForYou: true)
     
@@ -17,7 +17,9 @@ class ForYouController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        showLoading()
         viewModel.fetchNews {
+            self.hideSpinner()
             self.tableView.reloadData()
         }
     }
