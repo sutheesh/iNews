@@ -29,6 +29,8 @@ class NewsDetailsController: UIViewController {
         super.viewDidLoad()
         setupUI()
         applyTheme()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+
     }
 
     func setupUI() {
