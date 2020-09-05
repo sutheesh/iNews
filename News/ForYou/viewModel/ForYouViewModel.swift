@@ -61,9 +61,25 @@ class ForYouViewModel: NSObject {
         }
     }
     
+    func getSelecteLang() -> [SupportedItem] {
+        guard let configModel = sharedModel.shared.config else { return [] }
+        let supportedLang = configModel.supportedLanguages.filter({UserDefaults.standard.bool(forKey: "newsLang_" + $0.id)})
+        return supportedLang
+    }
+    
+    func getSelecteCategory() -> [SupportedItem] {
+        guard let configModel = sharedModel.shared.config else { return [] }
+        let supportedLang = configModel.supportedCategories.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
+        return supportedLang
+    }
+    
     var tags: [String] {
         guard let category = self.category else {
-            return []
+            let selectedLang = getSelecteLang()
+            let langs: [String] = selectedLang.compactMap { (item) -> String in
+                return item.id
+            }
+            return langs
         }
         return [category]
     }

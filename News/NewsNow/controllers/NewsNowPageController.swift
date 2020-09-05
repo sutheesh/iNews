@@ -13,7 +13,7 @@ class NewsNowPageController: TabPageViewController {
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         tabItems = controllers()
-        option.tabWidth = view.frame.width / CGFloat(tabItems.count)
+//        option.tabWidth = view.frame.width / CGFloat(tabItems.count)
         super.viewDidLoad()
     }
     
@@ -24,8 +24,7 @@ class NewsNowPageController: TabPageViewController {
             let vc = ForYouController.controller
             let model = ForYouViewModel(dataManager: NewsDataManager(), category: catagory.id)
             vc.viewModel = model
-            let navC = UINavigationController(rootViewController: vc)
-            controllers.append((navC, catagory.text))
+            controllers.append((vc, catagory.text))
         }
         return controllers
     }

@@ -11,4 +11,6 @@ class sharedModel: NSObject {
     private override init() {}
     static let shared = sharedModel()
     var config: ConfigModel?
+    var selectedLanguage: [SupportedItem] = []
+    var selectedCategory: [SupportedItem] = []
 }

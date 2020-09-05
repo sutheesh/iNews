@@ -43,7 +43,6 @@ class TabCollectionCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         currentBarView.isHidden = true
     }
 
@@ -86,12 +85,12 @@ extension TabCollectionCell {
 
     func highlightTitle() {
         itemLabel.textColor = option.currentColor
-        itemLabel.font = UIFont.boldSystemFont(ofSize: option.fontSize)
+        itemLabel.font = UIFont(name: "KohinoorBangla-Semibold", size: 16)
     }
 
     func unHighlightTitle() {
         itemLabel.textColor = option.defaultColor
-        itemLabel.font = UIFont.systemFont(ofSize: option.fontSize)
+        itemLabel.font = UIFont(name: "KohinoorBangla-Semibold", size: 16)
     }
 }
 

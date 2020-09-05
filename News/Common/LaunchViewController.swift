@@ -7,40 +7,93 @@
 //
 
 import UIKit
+enum FlowType {
+    case language, category, profile
+}
 
 class LaunchViewController: UIViewController {
     
+    @IBOutlet weak var selectdLanguages: UILabel!
+    @IBOutlet weak var languageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    
+    var flowType: FlowType = .language
+        
     var isFirstTime: Bool {
         !UserDefaults.standard.bool(forKey: "firstTimeUser")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        if flowType == .language {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }else {
+            collectionView.delegate = self
+            collectionView.dataSource = self
+        }
         
+        let rightBarButton = UIBarButtonItem(title: (flowType == .language ) ? "Next" : "Done", style: .done, target: self, action: #selector(nextButtonTap))
+        self.navigationItem.rightBarButtonItem = rightBarButton
         fetchConfig()
+        title = (flowType == .language ) ? "Language" : "Interest"
     }
 
+    @objc func nextButtonTap() {
+        if flowType == .language {
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "categoryView") as? LaunchViewController else { return }
+            vc.flowType = .category
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } else {
+            self.moveToHome()
+        }
+    }
+    
     func fetchConfig() {
-        NewsDataManager().fetchConfiguration { (config, error) in
-            guard config != nil else { return }
-            DispatchQueue.main.async {
-                sharedModel.shared.config = config?.first
-                if self.isFirstTime {
-                    self.tableView.reloadData()
-                    self.collectionView.reloadData()
-                    self.tableViewHeight.constant = CGFloat((62 * (config?.first?.supportedLanguages.count ?? 0) + 110))
-                } else {
-                    self.moveToHome()
+        guard let _ = sharedModel.shared.config else {
+            NewsDataManager().fetchConfiguration { (config, error) in
+                guard config != nil else { return }
+                DispatchQueue.main.async {
+                    sharedModel.shared.config = config?.first
+                    if self.isFirstTime {
+                        self.reloadData()
+                    } else {
+                        self.moveToHome()
+                    }
                 }
             }
+            return
+        }
+        reloadData()
+    }
+    
+    func reloadData() {
+        if self.flowType == .language {
+            self.tableView.reloadData()
+        } else {
+            self.collectionView.reloadData()
+        }
+        updateNextButton()
+    }
+    
+    func getSelecteLang() -> [SupportedItem] {
+        guard let configModel = sharedModel.shared.config else { return [] }
+        let supportedLang = configModel.supportedLanguages.filter({UserDefaults.standard.bool(forKey: "newsLang_" + $0.id)})
+        return supportedLang
+    }
+    
+    func getSelecteCategory() -> [SupportedItem] {
+        guard let configModel = sharedModel.shared.config else { return [] }
+        let supportedLang = configModel.supportedCategories.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
+        return supportedLang
+    }
+    
+    func updateNextButton() {
+        if self.flowType == .language {
+            self.navigationItem.rightBarButtonItem?.isEnabled = (getSelecteLang().count > 0)
+        } else {
+            self.navigationItem.rightBarButtonItem?.isEnabled = (getSelecteCategory().count > 0)
         }
     }
     
@@ -49,9 +102,30 @@ class LaunchViewController: UIViewController {
         UIApplication.shared.keyWindow?.rootViewController = controller
     }
     
+    func updateSelection(index: Int) -> Bool {
+        guard let configModel = sharedModel.shared.config else { return false }
+        let model = (flowType == .language) ? configModel.supportedLanguages[index] : configModel.supportedCategories[index]
+        let id = ((flowType == .language) ? "newsLang_" : "newsCategory_") + model.id
+        var isSelected = true
+        if UserDefaults.standard.bool(forKey: id) {
+            isSelected = false
+        }
+        UserDefaults.standard.set(isSelected, forKey: id)
+        UserDefaults.standard.synchronize()
+        return isSelected
+        
+    }
+    
 }
 
 extension LaunchViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = updateSelection(index: indexPath.row) ? .checkmark : .none
+        updateNextButton()
+    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Pick your languages"
@@ -65,6 +139,8 @@ extension LaunchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath) as? LanguageCell else { return UITableViewCell() }
         let lang = sharedModel.shared.config?.supportedLanguages[indexPath.row]
         cell.languageLabel.text = lang?.text
+        let id = "newsLang_" + (lang?.id ?? "")
+        cell.accessoryType = UserDefaults.standard.bool(forKey: id) ? .checkmark : .none
         return cell
     }
     
@@ -83,6 +159,9 @@ extension LaunchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if let image = category?.image, let imageUrl = URL(string: image) {
             cell.imageView.downloadImage(from: imageUrl)
         }
+        
+        let id = "newsCategory_" + (category?.id ?? "")
+        cell.checkMarkImageView.image = UserDefaults.standard.bool(forKey: id) ? UIImage(named: "check") : nil
         return cell
     }
     
@@ -91,4 +170,9 @@ extension LaunchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: width, height: 200)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryViewCell else { return }
+        cell.checkMarkImageView.image = updateSelection(index: indexPath.row) ? UIImage(named: "check") : nil
+        updateNextButton()
+    }
 }

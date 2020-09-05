@@ -19,7 +19,7 @@ internal class TabView: UIView {
     }
     var layouted: Bool = false
 
-    fileprivate var isInfinity: Bool = false
+    fileprivate var isInfinity: Bool = true
     fileprivate var option: TabPageOption = TabPageOption()
     fileprivate var beforeIndex: Int = 0
     fileprivate var currentIndex: Int = 0
@@ -161,7 +161,7 @@ extension TabView {
             let distance = (currentCell.frame.width / 2.0) + (nextCell.frame.width / 2.0)
             let scrollRate = contentOffsetX / frame.width
 
-            if fabs(scrollRate) > 0.6 {
+            if abs(scrollRate) > 0.6 {
                 nextCell.highlightTitle()
                 currentCell.unHighlightTitle()
             } else {
@@ -169,7 +169,7 @@ extension TabView {
                 currentCell.highlightTitle()
             }
 
-            let width = fabs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
+            let width = abs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
             if isInfinity {
                 let scroll = scrollRate * distance
                 collectionView.contentOffset.x = collectionViewContentOffsetX + scroll
@@ -251,12 +251,11 @@ extension TabView {
             }
             UIView.animate(withDuration: 0.2, animations: {
                 self.layoutIfNeeded()
-                }, completion: { _ in
-                    if !animated && shouldScroll {
-                        cell.isCurrent = true
-                    }
-                    
-                    self.updateCollectionViewUserInteractionEnabled(true)
+            }, completion: { _ in
+                if !animated && shouldScroll {
+                    cell.isCurrent = true
+                }
+                self.updateCollectionViewUserInteractionEnabled(true)
             })
         }
         beforeIndex = currentIndex
@@ -396,13 +395,5 @@ extension TabView: UICollectionViewDelegateFlowLayout {
         cachedCellSizes[indexPath] = size
 
         return size
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
     }
 }

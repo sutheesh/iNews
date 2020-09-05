@@ -11,4 +11,14 @@ import UIKit
 class CategoryViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var checkMarkView: UIView!
+    @IBOutlet weak var checkMarkImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        checkMarkView.layer.cornerRadius = 12.5
+        checkMarkView.layer.masksToBounds = true
+        checkMarkView.layer.borderColor = UIColor.white.cgColor
+        checkMarkView.layer.borderWidth = 2
+    }
 }

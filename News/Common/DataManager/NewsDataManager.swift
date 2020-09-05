@@ -51,6 +51,10 @@ class NewsDataManager: NewsDataManaging {
                 completion(nil, nil)
                 return
             }
+            #if DEBUG
+            print("URL STRING::\(url.absoluteString)")
+            print(String(decoding: data, as: UTF8.self))
+            #endif
             
             guard let jsonDictionary = try? JSONDecoder().decode([String: [ConfigModel]].self, from: data), let config = jsonDictionary["results"] else {
                 completion(nil, nil)
@@ -102,6 +106,11 @@ class NewsDataManager: NewsDataManaging {
                 completion(nil, nil)
                 return
             }
+            
+            #if DEBUG
+            print("URL STRING::\(url.absoluteString)")
+            print(String(decoding: data, as: UTF8.self))
+            #endif
             
             guard let jsonDictionary = try? JSONDecoder().decode([String: [NewsModel]].self, from: data), let news = jsonDictionary["results"] else {
                 completion(nil, nil)
