@@ -12,16 +12,17 @@ class ForYouViewModel: NSObject {
     let dataManager: NewsDataManaging
     let category: String?
     var cells: [cellType] = [.briefing, .news]
-
-    init(dataManager: NewsDataManaging, category: String? = nil) {
+    let isForYou: Bool
+    init(dataManager: NewsDataManaging, category: String? = nil, isForYou: Bool = false) {
         self.dataManager = dataManager
         self.category = category
+        self.isForYou = isForYou
         super.init()
         self.setupCells()
     }
     
     func setupCells() {
-        if tags.count > 0 {
+        if !isForYou {
             cells.removeFirst()
         }
     }

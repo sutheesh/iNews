@@ -261,11 +261,6 @@ extension TabView {
         beforeIndex = currentIndex
     }
 
-    /**
-     Touch event control of collectionView
-
-     - parameter userInteractionEnabled: collectionViewに渡すuserInteractionEnabled
-     */
     func updateCollectionViewUserInteractionEnabled(_ userInteractionEnabled: Bool) {
         collectionView.isUserInteractionEnabled = userInteractionEnabled
     }

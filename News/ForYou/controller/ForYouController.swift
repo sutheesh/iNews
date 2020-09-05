@@ -10,7 +10,7 @@ import UIKit
 
 class ForYouController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var viewModel = ForYouViewModel(dataManager: NewsDataManager())
+    var viewModel = ForYouViewModel(dataManager: NewsDataManager(), isForYou: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,13 @@ extension ForYouController: UITableViewDelegate {
             let data = viewModel.news[indexPath.row]
             guard let controller = UIStoryboard(name: "News", bundle: nil).instantiateViewController(withIdentifier: "NewsDetailsController") as? NewsDetailsController else { return }
             controller.data = data
-            self.navigationController?.pushViewController(controller, animated: true)
+            if viewModel.isForYou {
+                self.navigationController?.pushViewController(controller, animated: true)
+            }else {
+                if let topNavController = UIApplication.topViewController() as? UINavigationController {
+                    topNavController.pushViewController(controller, animated: true)
+                }
+            }
         default: break
         }
     }
@@ -65,5 +71,22 @@ extension ForYouController: UITableViewDelegate {
 extension ForYouController {
     static var controller: ForYouController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForYouController") as? ForYouController ?? ForYouController()
+    }
+}
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return navigationController
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
     }
 }
