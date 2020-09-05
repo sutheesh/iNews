@@ -11,16 +11,26 @@ import UIKit
 class ForYouController: NewsBaseController {
     @IBOutlet weak var tableView: UITableView!
     var viewModel = ForYouViewModel(dataManager: NewsDataManager(), isForYou: true)
-    
+    private let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
         showLoading()
         viewModel.fetchNews {
             self.hideSpinner()
             self.tableView.reloadData()
+        }
+    }
+    
+    @objc private func refreshWeatherData(_ sender: Any) {
+        viewModel.fetchNews {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
 }

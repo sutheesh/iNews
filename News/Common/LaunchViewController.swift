@@ -18,19 +18,23 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     var flowType: FlowType = .profile
-        
+    
     var isFirstTime: Bool {
         !UserDefaults.standard.bool(forKey: "firstTimeUser")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rightBarButton = UIBarButtonItem(title: (flowType == .language ) ? "Next" : "Done", style: .done, target: self, action: #selector(nextButtonTap))
-        self.navigationItem.rightBarButtonItem = rightBarButton
         fetchConfig()
         title = (flowType == .language ) ? "Language" : "Interest"
     }
 
+    func setUpNavigation() {
+        guard flowType != .profile, isFirstTime else { return }
+        let rightBarButton = UIBarButtonItem(title: (flowType == .language ) ? "Next" : "Done", style: .done, target: self, action: #selector(nextButtonTap))
+        self.navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
     @objc func nextButtonTap() {
         if flowType == .language {
             guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "categoryView") as? LaunchViewController else { return }
@@ -39,6 +43,13 @@ class LaunchViewController: UIViewController {
             
         } else {
             self.moveToHome()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isFirstTime {
+            reloadData()
         }
     }
     
@@ -76,9 +87,18 @@ class LaunchViewController: UIViewController {
                     return item.text
                 }
                 selectdLanguages.text = langs.joined(separator: ",")
+                let gesture = UITapGestureRecognizer(target: self, action:#selector(chooseLanguage(_:)))
+                languageView.addGestureRecognizer(gesture)
             }
         }
+        setUpNavigation()
         updateNextButton()
+    }
+    
+    @objc func chooseLanguage(_ sender:UITapGestureRecognizer){
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "LanguageController") as? LaunchViewController else { return }
+        vc.flowType = .language
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     static func getSelecteLang() -> [SupportedItem] {
