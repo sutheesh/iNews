@@ -77,10 +77,21 @@ class LaunchViewController: UIViewController {
         updateNextButton()
     }
     
-    func getSelecteLang() -> [SupportedItem] {
+    static func getSelecteLang() -> [SupportedItem] {
         guard let configModel = sharedModel.shared.config else { return [] }
         let supportedLang = configModel.supportedLanguages.filter({UserDefaults.standard.bool(forKey: "newsLang_" + $0.id)})
         return supportedLang
+    }
+    
+    var availableCategories: [SupportedItem] = {
+        let tags = getSelecteLang().compactMap { (item) -> [SupportedItem]? in
+            return item.tags
+        }
+        return tags.flatMap { $0 }
+    }()
+    
+    var selectedCategories: [SupportedItem] {
+        return availableCategories.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
     }
     
     func getSelecteCategory() -> [SupportedItem] {
@@ -91,9 +102,9 @@ class LaunchViewController: UIViewController {
     
     func updateNextButton() {
         if self.flowType == .language {
-            self.navigationItem.rightBarButtonItem?.isEnabled = (getSelecteLang().count > 0)
+            self.navigationItem.rightBarButtonItem?.isEnabled = (LaunchViewController.getSelecteLang().count > 0)
         } else {
-            self.navigationItem.rightBarButtonItem?.isEnabled = (getSelecteCategory().count > 0)
+            self.navigationItem.rightBarButtonItem?.isEnabled = (selectedCategories.count > 0)
         }
     }
     
@@ -104,7 +115,7 @@ class LaunchViewController: UIViewController {
     
     func updateSelection(index: Int) -> Bool {
         guard let configModel = sharedModel.shared.config else { return false }
-        let model = (flowType == .language) ? configModel.supportedLanguages[index] : configModel.supportedCategories[index]
+        let model = (flowType == .language) ? configModel.supportedLanguages[index] : availableCategories[index]
         let id = ((flowType == .language) ? "newsLang_" : "newsCategory_") + model.id
         var isSelected = true
         if UserDefaults.standard.bool(forKey: id) {
@@ -148,19 +159,19 @@ extension LaunchViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension LaunchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sharedModel.shared.config?.supportedCategories.count ?? 0
+        return availableCategories.count //sharedModel.shared.config?.supportedCategories.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryViewCell", for: indexPath) as? CategoryViewCell else { return UICollectionViewCell() }
-        let category = sharedModel.shared.config?.supportedCategories[indexPath.row]
-        cell.categoryLabel.text = category?.text
+        let category = availableCategories[indexPath.row]
+        cell.categoryLabel.text = category.text
         cell.contentView.layer.cornerRadius = 3
-        if let image = category?.image, let imageUrl = URL(string: image) {
+        if let image = category.image, let imageUrl = URL(string: image) {
             cell.imageView.downloadImage(from: imageUrl)
         }
         
-        let id = "newsCategory_" + (category?.id ?? "")
+        let id = "newsCategory_" + category.id
         cell.checkMarkImageView.image = UserDefaults.standard.bool(forKey: id) ? UIImage(named: "check") : nil
         return cell
     }

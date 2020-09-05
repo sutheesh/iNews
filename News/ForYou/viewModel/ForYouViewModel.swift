@@ -33,6 +33,22 @@ class ForYouViewModel: NSObject {
         case briefing, news
     }
     
+    var languages: [String] {
+        let selectedLang = getSelecteLang()
+        let langs: [String] = selectedLang.compactMap { (item) -> String in
+            return item.id
+        }
+        return langs
+    }
+    
+    var categories: [String] {
+        let selectedCategory = availableCategories
+        let category: [String] = selectedCategory.compactMap { (item) -> String in
+            return item.id
+        }
+        return category
+    }
+    
     var numberOfSection: Int {
         return cells.count
     }
@@ -47,10 +63,15 @@ class ForYouViewModel: NSObject {
     }
     
     func fetchNews(callback:@escaping()->Void) {
+//        http://139.59.95.235/parse/classes/Article?order=-publish_date&where={"$and":[{"lang":{"$in":["Malayalam","Tamil"]}},{"tags":{"$in":["Pallakad","Abroad"]}}]}
+        
         var urlString = NewsConstants.newsUrl
         if tags.count > 0 {
             urlString += "&where={\"tags\":{\"$all\": \(tags)}}"
+        }else {
+            urlString += "&where={\"$and\":[{\"lang\":{\"$in\":\(languages)}},{\"tags\":{\"$in\":\(categories)}}]}"
         }
+        
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
         dataManager.fetchNews(urlString) { (data, error) in
@@ -68,19 +89,17 @@ class ForYouViewModel: NSObject {
         return supportedLang
     }
     
-    func getSelecteCategory() -> [SupportedItem] {
-        guard let configModel = sharedModel.shared.config else { return [] }
-        let supportedLang = configModel.supportedCategories.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
-        return supportedLang
+    var availableCategories: [SupportedItem] {
+        let tags = getSelecteLang().compactMap { (item) -> [SupportedItem]? in
+            return item.tags?.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
+            
+        }
+        return tags.flatMap { $0 }
     }
     
     var tags: [String] {
         guard let category = self.category else {
-            let selectedLang = getSelecteLang()
-            let langs: [String] = selectedLang.compactMap { (item) -> String in
-                return item.id
-            }
-            return langs
+            return []
         }
         return [category]
     }

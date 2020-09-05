@@ -16,4 +16,5 @@ class SupportedItem: Codable {
     let id: String
     let text: String
     let image: String?
+    let tags: [SupportedItem]?
 }

@@ -21,4 +21,9 @@ class CategoryViewCell: UICollectionViewCell {
         checkMarkView.layer.borderColor = UIColor.white.cgColor
         checkMarkView.layer.borderWidth = 2
     }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+        checkMarkImageView.image = nil
+    }
 }
