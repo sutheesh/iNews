@@ -255,7 +255,7 @@
                         <segue destination="pr1-fh-cbH" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="RB8-9b-B53" kind="relationship" relationship="viewControllers" id="DT7-QR-C7P"/>
                         <segue destination="JZA-N7-Ieq" kind="relationship" relationship="viewControllers" id="pHd-QT-qfb"/>
-                        <segue destination="Sb0-LJ-mN5" kind="relationship" relationship="viewControllers" id="7UF-PV-Ue5"/>
+                        <segue destination="GgN-co-lUF" kind="relationship" relationship="viewControllers" id="zPY-Mv-waP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -361,7 +361,7 @@
             </objects>
             <point key="canvasLocation" x="433.125" y="-1021.4788732394367"/>
         </scene>
-        <!--Launch View Controller-->
+        <!--Profile-->
         <scene sceneID="a57-YY-GPv">
             <objects>
                 <viewController storyboardIdentifier="categoryView" id="GgN-co-lUF" customClass="LaunchViewController" customModule="iNews" customModuleProvider="target" sceneMemberID="viewController">
@@ -370,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pkg-w8-ASD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPa-qE-pSW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
@@ -419,7 +419,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="p3T-3y-bta">
-                                        <rect key="frame" x="0.0" y="75" width="320" height="493"/>
+                                        <rect key="frame" x="0.0" y="75" width="320" height="444"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="0.0" id="YVn-EY-fxQ">
                                             <size key="itemSize" width="128" height="128"/>
@@ -428,7 +428,7 @@
                                             <inset key="sectionInset" minX="3" minY="3" maxX="3" maxY="3"/>
                                         </collectionViewFlowLayout>
                                         <view key="backgroundView" contentMode="scaleToFill" id="V8L-QB-CKt">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="493"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="444"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </view>
@@ -511,6 +511,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zlk-6j-gOJ"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="XFm-fU-JIw"/>
                     <connections>
                         <outlet property="collectionView" destination="p3T-3y-bta" id="aYC-k8-9M6"/>
                         <outlet property="languageView" destination="NPa-qE-pSW" id="1CY-0M-p4d"/>
@@ -519,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmy-tU-o3x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.5" y="-1021.4788732394367"/>
+            <point key="canvasLocation" x="878" y="895"/>
         </scene>
         <!--For You-->
         <scene sceneID="ZjV-eH-HRb">

@@ -17,7 +17,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var languageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    var flowType: FlowType = .language
+    var flowType: FlowType = .profile
         
     var isFirstTime: Bool {
         !UserDefaults.standard.bool(forKey: "firstTimeUser")
@@ -25,14 +25,6 @@ class LaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if flowType == .language {
-            tableView.delegate = self
-            tableView.dataSource = self
-        }else {
-            collectionView.delegate = self
-            collectionView.dataSource = self
-        }
-        
         let rightBarButton = UIBarButtonItem(title: (flowType == .language ) ? "Next" : "Done", style: .done, target: self, action: #selector(nextButtonTap))
         self.navigationItem.rightBarButtonItem = rightBarButton
         fetchConfig()
@@ -57,6 +49,7 @@ class LaunchViewController: UIViewController {
                 DispatchQueue.main.async {
                     sharedModel.shared.config = config?.first
                     if self.isFirstTime {
+                        self.flowType = .language
                         self.reloadData()
                     } else {
                         self.moveToHome()
@@ -70,9 +63,20 @@ class LaunchViewController: UIViewController {
     
     func reloadData() {
         if self.flowType == .language {
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
             self.tableView.reloadData()
         } else {
+            collectionView.delegate = self
+            collectionView.dataSource = self
             self.collectionView.reloadData()
+            languageView.isHidden = (flowType == .category)
+            if flowType == .profile {
+                let langs = LaunchViewController.getSelecteLang().compactMap { (item) -> String? in
+                    return item.text
+                }
+                selectdLanguages.text = langs.joined(separator: ",")
+            }
         }
         updateNextButton()
     }
