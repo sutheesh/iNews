@@ -11,7 +11,7 @@ struct NewsConstants {
     private init() {}
     static let useLocalNews = false
     static let useLocalConfig = false
-    static let urlHost = "http://139.59.95.235/parse/classes/"
+    static let urlHost = "http://app.newsonehd.com/parse/classes/"
     static let newsUrl = "Article?order=-publish_date"
     static let inputDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     static let outputDateFormat = "MMM dd,yyyy h:mm a"

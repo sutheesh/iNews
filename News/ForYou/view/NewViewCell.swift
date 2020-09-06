@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewViewCell: UITableViewCell {
     @IBOutlet weak var newAuther: UILabel!
@@ -31,12 +32,18 @@ class NewViewCell: UITableViewCell {
         newAuther.text = data.author
         newsDescription.text = data.title
         timeLabel.text = Date.dateString(from: data.publish_date.iso)
-        
-        ImageLoader.sharedLoader.imageForUrl(urlString: data.image_url) { image, _ in
-            DispatchQueue.main.async { [weak self] in
-                guard let image = image else { return }
-                self?.newsImageView.image = image
-            }
+        if let url = URL(string: data.image_url) {
+            let processor = DownsamplingImageProcessor(size: newsImageView.bounds.size)
+            newsImageView.kf.indicatorType = .activity
+            newsImageView.kf.setImage(
+                with: url,
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+
         }
     }
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,29 +32,27 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9cZ-Wk-Nu8">
                                                 <rect key="frame" x="40" y="8" width="334" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCb-nL-M0s">
-                                                        <rect key="frame" x="0.0" y="7.6666666666666572" width="25" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="J4x-SI-jhB"/>
-                                                            <constraint firstAttribute="width" constant="25" id="xYn-Zw-1x2"/>
-                                                        </constraints>
-                                                        <state key="normal" image="fb"/>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDU-CJ-CAa">
-                                                        <rect key="frame" x="103" y="7.6666666666666572" width="25" height="25"/>
+                                                        <rect key="frame" x="0.0" y="7.6666666666666572" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="1jh-8U-EVS"/>
                                                             <constraint firstAttribute="width" constant="25" id="Do9-U9-cvW"/>
                                                         </constraints>
-                                                        <state key="normal" title=" " image="tw"/>
+                                                        <state key="normal" title=" " image="mail"/>
+                                                        <connections>
+                                                            <action selector="emailButtonClicks:" destination="VVa-Vk-J1A" eventType="touchUpInside" id="7h7-5Q-mqU"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7N-ge-ybS">
-                                                        <rect key="frame" x="206" y="7.6666666666666572" width="25" height="25"/>
+                                                        <rect key="frame" x="154.66666666666666" y="7.6666666666666572" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="1vG-9S-KjJ"/>
                                                             <constraint firstAttribute="height" constant="25" id="ZNM-qr-HzY"/>
                                                         </constraints>
-                                                        <state key="normal" image="mail"/>
+                                                        <state key="normal" image="share_ic"/>
+                                                        <connections>
+                                                            <action selector="shareButtonClick:" destination="VVa-Vk-J1A" eventType="touchUpInside" id="c3A-eW-V8q"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-XM-JUj">
                                                         <rect key="frame" x="309" y="7.6666666666666572" width="25" height="25"/>
@@ -61,7 +60,10 @@
                                                             <constraint firstAttribute="height" constant="25" id="NXq-eQ-TTi"/>
                                                             <constraint firstAttribute="width" constant="25" id="qav-YJ-evy"/>
                                                         </constraints>
-                                                        <state key="normal" title=" " image="share_ic"/>
+                                                        <state key="normal" title=" " image="internet"/>
+                                                        <connections>
+                                                            <action selector="internetButtonClick:" destination="VVa-Vk-J1A" eventType="touchUpInside" id="dq7-Rp-QR6"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -186,15 +188,11 @@
                     <connections>
                         <outlet property="authorLabel" destination="gNf-G0-j9t" id="2XM-JJ-zRd"/>
                         <outlet property="detailsLabel" destination="7pr-Fg-4Or" id="7A9-lw-Gq0"/>
-                        <outlet property="facebook" destination="lCb-nL-M0s" id="ooC-Gc-3BX"/>
                         <outlet property="imageView" destination="5cH-BX-y9q" id="pZg-Qv-one"/>
-                        <outlet property="main" destination="q7N-ge-ybS" id="ULP-ux-EIb"/>
                         <outlet property="newsView" destination="QAt-qC-XdM" id="ViG-UW-Ep6"/>
                         <outlet property="publishDateLabel" destination="9cD-Ch-NO8" id="xqf-MP-LRc"/>
-                        <outlet property="share" destination="jvb-XM-JUj" id="Tmf-nM-5Hm"/>
                         <outlet property="titleLabel" destination="lmT-tE-VpY" id="9V5-xt-REM"/>
                         <outlet property="topView" destination="ZIG-I6-fBl" id="GOx-UJ-k7Y"/>
-                        <outlet property="twitter" destination="aDU-CJ-CAa" id="iG1-lZ-4nE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOx-FH-Ys3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,10 +202,9 @@
     </scenes>
     <resources>
         <image name="back_arrow" width="44" height="25.5"/>
-        <image name="fb" width="250" height="250"/>
+        <image name="internet" width="256" height="256"/>
         <image name="mail" width="96" height="96"/>
         <image name="save_icon" width="240" height="240"/>
         <image name="share_ic" width="100" height="100"/>
-        <image name="tw" width="250" height="250"/>
     </resources>
 </document>

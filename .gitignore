@@ -1,0 +1,21 @@
+## openFrameworks
+#XCode
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+
+#XCode 4
+xcuserdata/
+*.xcworkspace
+
+##
+*~
+*~.nib
+*~.xib
+.DS_Store
+
+## 
+bin/data/*
+Pods/

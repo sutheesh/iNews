@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 enum FlowType {
     case language, category, profile
 }
@@ -18,6 +20,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     var flowType: FlowType = .profile
+    @IBOutlet weak var loadingView: UIView!
     
     var isFirstTime: Bool {
         !UserDefaults.standard.bool(forKey: "firstTimeUser")
@@ -25,14 +28,19 @@ class LaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = ""
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         fetchConfig()
-        title = (flowType == .language ) ? "Language" : "Interest"
     }
 
     func setUpNavigation() {
         guard flowType != .profile, isFirstTime else { return }
         let rightBarButton = UIBarButtonItem(title: (flowType == .language ) ? "Next" : "Done", style: .done, target: self, action: #selector(nextButtonTap))
         self.navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    func updateTitle() {
+        title = (flowType == .language ) ? "Language" : (flowType == .category ) ? "Area of interest" : "Profile"
     }
     
     @objc func nextButtonTap() {
@@ -73,7 +81,9 @@ class LaunchViewController: UIViewController {
     }
     
     func reloadData() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         if self.flowType == .language {
+            loadingView.isHidden = true
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.reloadData()
@@ -91,6 +101,7 @@ class LaunchViewController: UIViewController {
                 languageView.addGestureRecognizer(gesture)
             }
         }
+        updateTitle()
         setUpNavigation()
         updateNextButton()
     }
@@ -192,7 +203,7 @@ extension LaunchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.categoryLabel.text = category.text
         cell.contentView.layer.cornerRadius = 3
         if let image = category.image, let imageUrl = URL(string: image) {
-            cell.imageView.downloadImage(from: imageUrl)
+            cell.imageView.kf.setImage(with: imageUrl)
         }
         
         let id = "newsCategory_" + category.id

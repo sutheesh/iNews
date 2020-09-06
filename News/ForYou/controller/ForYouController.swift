@@ -19,7 +19,7 @@ class ForYouController: NewsBaseController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshNewsData(_:)), for: .valueChanged)
         showLoading()
         viewModel.fetchNews {
             self.hideSpinner()
@@ -27,7 +27,7 @@ class ForYouController: NewsBaseController {
         }
     }
     
-    @objc private func refreshWeatherData(_ sender: Any) {
+    @objc private func refreshNewsData(_ sender: Any) {
         viewModel.fetchNews {
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()

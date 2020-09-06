@@ -342,11 +342,32 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyR-Bi-hlT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_bytes.png" translatesAutoresizingMaskIntoConstraints="NO" id="7wF-nW-3MD">
+                                        <rect key="frame" x="110" y="252" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Zhf-TI-XGF"/>
+                                            <constraint firstAttribute="height" constant="100" id="cbt-cY-HKD"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="7wF-nW-3MD" firstAttribute="centerX" secondItem="CyR-Bi-hlT" secondAttribute="centerX" id="TsH-kx-Hcu"/>
+                                    <constraint firstItem="7wF-nW-3MD" firstAttribute="centerY" secondItem="CyR-Bi-hlT" secondAttribute="centerY" constant="18" id="ukw-J6-3i7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="qiD-tu-vMl" firstAttribute="bottom" secondItem="GVh-LT-jFj" secondAttribute="bottom" id="7OB-Sv-Ed1"/>
+                            <constraint firstItem="CyR-Bi-hlT" firstAttribute="bottom" secondItem="qiD-tu-vMl" secondAttribute="bottom" id="9Z9-mG-DI6"/>
+                            <constraint firstItem="CyR-Bi-hlT" firstAttribute="leading" secondItem="qiD-tu-vMl" secondAttribute="leading" id="CJU-1b-rCS"/>
                             <constraint firstItem="GVh-LT-jFj" firstAttribute="top" secondItem="qiD-tu-vMl" secondAttribute="top" id="DiB-0l-5YZ"/>
+                            <constraint firstItem="CyR-Bi-hlT" firstAttribute="trailing" secondItem="qiD-tu-vMl" secondAttribute="trailing" id="ONx-69-als"/>
+                            <constraint firstItem="CyR-Bi-hlT" firstAttribute="top" secondItem="qiD-tu-vMl" secondAttribute="top" constant="-44" id="SNh-lR-LCU"/>
                             <constraint firstItem="GVh-LT-jFj" firstAttribute="trailing" secondItem="qiD-tu-vMl" secondAttribute="trailing" id="kj5-Ju-Vs3"/>
                             <constraint firstItem="GVh-LT-jFj" firstAttribute="leading" secondItem="qiD-tu-vMl" secondAttribute="leading" id="se3-ru-eMD"/>
                         </constraints>
@@ -354,6 +375,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="56U-uI-G1L"/>
                     <connections>
+                        <outlet property="loadingView" destination="CyR-Bi-hlT" id="cgP-Ft-FlD"/>
                         <outlet property="tableView" destination="GVh-LT-jFj" id="diL-Mh-y6s"/>
                     </connections>
                 </viewController>
@@ -603,6 +625,7 @@
         <image name="check" width="256" height="256"/>
         <image name="favorite" width="20" height="20"/>
         <image name="for_you" width="25" height="25"/>
+        <image name="news_bytes.png" width="730" height="728"/>
         <image name="news_now" width="20" height="20"/>
         <image name="profile" width="28" height="28"/>
     </resources>
