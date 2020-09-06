@@ -20,7 +20,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     var flowType: FlowType = .profile
-    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingView: UIView?
     
     var isFirstTime: Bool {
         !UserDefaults.standard.bool(forKey: "firstTimeUser")
@@ -50,13 +50,14 @@ class LaunchViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
         } else {
+            UserDefaults.standard.set(true, forKey: "firstTimeUser")
             self.moveToHome()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !isFirstTime {
+        if !isFirstTime, loadingView?.isHidden ?? true {
             reloadData()
         }
     }
@@ -83,7 +84,7 @@ class LaunchViewController: UIViewController {
     func reloadData() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         if self.flowType == .language {
-            loadingView.isHidden = true
+            loadingView?.isHidden = true
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.reloadData()
@@ -118,12 +119,12 @@ class LaunchViewController: UIViewController {
         return supportedLang
     }
     
-    var availableCategories: [SupportedItem] = {
-        let tags = getSelecteLang().compactMap { (item) -> [SupportedItem]? in
+    var availableCategories: [SupportedItem] {
+        let tags = LaunchViewController.getSelecteLang().compactMap { (item) -> [SupportedItem]? in
             return item.tags
         }
         return tags.flatMap { $0 }
-    }()
+    }
     
     var selectedCategories: [SupportedItem] {
         return availableCategories.filter({UserDefaults.standard.bool(forKey: "newsCategory_" + $0.id)})
