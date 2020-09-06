@@ -203,7 +203,6 @@ extension NewsDetailsController: MFMailComposeViewControllerDelegate {
             let data = try? JSONEncoder().encode(dict)
             try data?.write(to: fileUrl, options: [])
         } catch {
-            print(error)
         }
         
     }
@@ -217,10 +216,8 @@ extension NewsDetailsController: MFMailComposeViewControllerDelegate {
             let data = try Data(contentsOf: fileUrl, options: .uncached)
             
             guard let jsonDictionary = try? JSONDecoder().decode([String: [NewsModel]].self, from: data) else { return [] }
-            print(jsonDictionary)
             return jsonDictionary["data"] ?? []
         } catch {
-            print(error)
         }
         return []
     }

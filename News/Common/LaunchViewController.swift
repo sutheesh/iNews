@@ -40,7 +40,7 @@ class LaunchViewController: UIViewController {
     }
     
     func updateTitle() {
-        title = (flowType == .language ) ? "Language" : (flowType == .category ) ? "Area of interest" : "Profile"
+        title = (flowType == .language ) ? "Language" : (flowType == .category ) ? "Interest In" : "Profile"
     }
     
     @objc func nextButtonTap() {
