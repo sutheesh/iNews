@@ -19,7 +19,8 @@ class NewsDetailsController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var publishDateLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
-
+    @IBOutlet weak var saveImageView: UIImageView!
+    
     var data: NewsModel?
     var image: UIImage?
     
@@ -27,7 +28,12 @@ class NewsDetailsController: UIViewController {
         super.viewDidLoad()
         setupUI()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-
+        saveImageView.image = UIImage(named: "save_icon")?.withRenderingMode(.alwaysTemplate)
+        if UserDefaults.standard.bool(forKey: "\(data?.identifier ?? "")") {
+            saveImageView.tintColor = UIColor(hex: "#47A5EC")
+        }else {
+            saveImageView.tintColor = UIColor.white
+        }
     }
 
     func setupUI() {
@@ -151,6 +157,22 @@ class NewsDetailsController: UIViewController {
         
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    @IBAction func saveButtonAction(_ sender: Any) {
+        guard let data = data else { return }
+        var isSaved = true
+        if UserDefaults.standard.bool(forKey: "\(data.identifier)") {
+            isSaved = false
+            saveImageView.tintColor = UIColor.white
+            saveToFav(isRemove: true)
+        }else {
+            saveImageView.tintColor = UIColor(hex: "#47A5EC")
+            saveToFav()
+        }
+        UserDefaults.standard.set(isSaved, forKey: "\(data.identifier)")
+        UserDefaults.standard.synchronize()
+    }
+    
 }
 
 extension NewsDetailsController: MFMailComposeViewControllerDelegate {
@@ -160,5 +182,46 @@ extension NewsDetailsController: MFMailComposeViewControllerDelegate {
         if result == .sent {
             NewsHelper.showAlert(vc: self, title: "Appreciate your feedback!", message: "We will get in touch with you soon.")
         }
+    }
+    
+    func saveToFav(isRemove: Bool = false) {
+        
+        // Get the url of Persons.json in document directory
+        guard let data = data, let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileUrl = documentDirectoryUrl.appendingPathComponent("Persons.json")
+
+        var personArray =  retrieveFromJsonFile()
+        if isRemove {
+            personArray.removeAll { $0.identifier == data.identifier }
+        }else {
+            personArray.append(data)
+        }
+        
+        let dict = ["data": personArray]
+
+        do {
+            let data = try? JSONEncoder().encode(dict)
+            try data?.write(to: fileUrl, options: [])
+        } catch {
+            print(error)
+        }
+        
+    }
+    
+    func retrieveFromJsonFile() -> [NewsModel] {
+        
+        guard let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [] }
+        let fileUrl = documentsDirectoryUrl.appendingPathComponent("Persons.json")
+
+        do {
+            let data = try Data(contentsOf: fileUrl, options: .uncached)
+            
+            guard let jsonDictionary = try? JSONDecoder().decode([String: [NewsModel]].self, from: data) else { return [] }
+            print(jsonDictionary)
+            return jsonDictionary["data"] ?? []
+        } catch {
+            print(error)
+        }
+        return []
     }
 }
